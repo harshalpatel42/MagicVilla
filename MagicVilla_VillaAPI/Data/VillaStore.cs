@@ -7,7 +7,7 @@ namespace MagicVilla_VillaAPI.Data
                 new VillaDTO{ Id = 1 ,Name= "Pool View" },
                 new VillaDTO{ Id = 2 ,Name= "Beach View" },
                 new () {Id = 3, Name = "Country Inn"},
-                new () {Id = 4, Name = ""}
+                new () {Id = 4, Name = "Tech Mahindra"}
             };
     }
 }
