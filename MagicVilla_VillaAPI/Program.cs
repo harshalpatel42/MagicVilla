@@ -1,15 +1,13 @@
-using Serilog;
+using MagicVilla_VillaAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
-Log.Logger = new LoggerConfiguration().MinimumLevel
-    .Debug()
-    .WriteTo.File("log/villaLogs.txt",rollingInterval:RollingInterval.Day)
-    .CreateLogger();
 
-builder.Host.UseSerilog();
-
-
+builder.Services.AddDbContext<ApplicationDBContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
 
 // Add services to the container.
 builder.Services.AddControllers(options => {   
@@ -18,7 +16,6 @@ builder.Services.AddControllers(options => {
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
