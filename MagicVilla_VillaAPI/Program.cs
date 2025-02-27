@@ -1,12 +1,21 @@
+using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+Log.Logger = new LoggerConfiguration().MinimumLevel
+    .Debug()
+    .WriteTo.File("log/villaLogs.txt",rollingInterval:RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+
+
+// Add services to the container.
 builder.Services.AddControllers(options => {   
     //options.ReturnHttpNotAcceptable = true;
     }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 
