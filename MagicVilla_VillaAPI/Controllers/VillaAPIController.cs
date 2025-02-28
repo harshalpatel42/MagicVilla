@@ -4,6 +4,7 @@ using MagicVilla_VillaAPI.Model.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_VillaAPI.Controllers
 {
@@ -203,7 +204,8 @@ namespace MagicVilla_VillaAPI.Controllers
             {
                 return BadRequest();
             }
-            var villa = _db.Villas.FirstOrDefault(u => u.Id == id);
+            // we do not want to track this Villa model since we aren't doing any db changes here
+            var villa = _db.Villas.AsNoTracking().FirstOrDefault(u => u.Id == id);
 
             VillaDTO villaDTO = new()
             {
@@ -221,23 +223,23 @@ namespace MagicVilla_VillaAPI.Controllers
                 return NotFound();
             }
             patchDTO.ApplyTo(villaDTO,ModelState);
-            if(!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
             Villa model = new()
             {
-                Id = villa.Id,
-                Name = villa.Name,
-                Details = villa.Details,
-                Rate = villa.Rate,
-                Sqft = villa.Sqft,
-                Occupancy = villa.Occupancy,
-                ImageUrl = villa.ImageUrl,
-                Amenity = villa.Amenity
+                Id = villaDTO.Id,
+                Name = villaDTO.Name,
+                Details = villaDTO.Details,
+                Rate = villaDTO.Rate,
+                Sqft = villaDTO.Sqft,
+                Occupancy = villaDTO.Occupancy,
+                ImageUrl = villaDTO.ImageUrl,
+                Amenity = villaDTO.Amenity
             };
-            _db.Update(model);
+            _db.Villas.Update(model);
             _db.SaveChanges();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return NoContent();
         }
 
