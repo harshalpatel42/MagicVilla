@@ -106,16 +106,7 @@ namespace MagicVilla_VillaAPI.Controllers
             //}
 
             Villa model = _mapper.Map<Villa>(createDTO);
-            //Villa model = new()
-            //{
-            //    Name = createDTO.Name,
-            //    Details = createDTO.Details,
-            //    Rate = createDTO.Rate,
-            //    Sqft = createDTO.Sqft,
-            //    Occupancy = createDTO.Occupancy,
-            //    ImageUrl = createDTO.ImageUrl,
-            //    Amenity = createDTO.Amenity
-            //};
+            
             await _db.Villas.AddAsync(model);
             await _db.SaveChangesAsync();
 
@@ -178,17 +169,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 return BadRequest();
             }
             Villa model = _mapper.Map<Villa>(updateDTO);
-            //Villa model = new()
-            //{
-            //    Id = updateDTO.Id,
-            //    Name = updateDTO.Name,
-            //    Details = updateDTO.Details,
-            //    Rate = updateDTO.Rate,
-            //    Sqft = updateDTO.Sqft,
-            //    Occupancy = updateDTO.Occupancy,
-            //    ImageUrl = updateDTO.ImageUrl,
-            //    Amenity = updateDTO.Amenity
-            //};
+            
             _db.Villas.Update(model);
             await _db.SaveChangesAsync();
             return NoContent();
@@ -216,18 +197,6 @@ namespace MagicVilla_VillaAPI.Controllers
 
             VillaUpdateDTO villaDTO = _mapper.Map<VillaUpdateDTO>(villa);
 
-            //VillaUpdateDTO villaDTO = new()
-            //{
-            //    Id = villa.Id,
-            //    Name = villa.Name,
-            //    Details = villa.Details,
-            //    Rate = villa.Rate,
-            //    Sqft = villa.Sqft,
-            //    Occupancy = villa.Occupancy,
-            //    ImageUrl = villa.ImageUrl,
-            //    Amenity = villa.Amenity
-            //};
-
             if (villa == null)
             {
                 return NotFound();
@@ -237,17 +206,6 @@ namespace MagicVilla_VillaAPI.Controllers
 
 
             Villa model = _mapper.Map<Villa>(villaDTO);
-            //Villa model = new()
-            //{
-            //    Id = villaDTO.Id,
-            //    Name = villaDTO.Name,
-            //    Details = villaDTO.Details,
-            //    Rate = villaDTO.Rate,
-            //    Sqft = villaDTO.Sqft,
-            //    Occupancy = villaDTO.Occupancy,
-            //    ImageUrl = villaDTO.ImageUrl,
-            //    Amenity = villaDTO.Amenity
-            //};
 
             _db.Villas.Update(model);
 
