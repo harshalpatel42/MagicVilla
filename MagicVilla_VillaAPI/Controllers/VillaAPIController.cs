@@ -95,10 +95,6 @@ namespace MagicVilla_VillaAPI.Controllers
                 ModelState.AddModelError("CustomError", "Villa Already Exists");
                 return BadRequest(ModelState);
             }
-            if (villaDTO == null)
-            {
-                return BadRequest();
-            }
             if (villaDTO.Id > 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
