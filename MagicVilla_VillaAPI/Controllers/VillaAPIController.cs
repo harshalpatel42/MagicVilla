@@ -26,8 +26,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
 
 
-
-
+        
 
 
 
@@ -41,7 +40,7 @@ namespace MagicVilla_VillaAPI.Controllers
         public async Task<ActionResult<IEnumerable<VillaDTO>>> GetVillas()
         {
             IEnumerable<Villa> villaList = await _db.Villas.ToListAsync();
-            return Ok(_mapper.Map<VillaDTO>(villaList));
+            return Ok(_mapper.Map<List<VillaDTO>>(villaList));
         }
 
 
@@ -143,16 +142,10 @@ namespace MagicVilla_VillaAPI.Controllers
             {
                 return NotFound();
             }
-            else
-            {
-                _db.Villas.Remove(villa);
-                await _db.SaveChangesAsync();
-                return NoContent();
-            }
+            _db.Villas.Remove(villa);
+            await _db.SaveChangesAsync();
+            return NoContent();
         }
-
-
-
 
 
 
