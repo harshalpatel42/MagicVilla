@@ -43,7 +43,7 @@ namespace MagicVilla_VillaAPI.Repository
         public async Task<List<Villa>> GetAllAsync(Expression<Func<Villa,bool>> filter = null)
         {
             IQueryable<Villa> query = _db.Villas;
-            if (query != null)
+            if (filter != null)
             {
                 query = query.Where(filter);
             }
