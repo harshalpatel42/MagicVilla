@@ -27,7 +27,7 @@ namespace MagicVilla_VillaAPI.Repository
             IQueryable<T> query = dbSet;
             if(!tracked)
             {
-                query.AsNoTracking();
+                query = query.AsNoTracking();
             }
             if (query != null)
             {
