@@ -6,11 +6,14 @@ using System.Linq.Expressions;
 
 namespace MagicVilla_VillaAPI.Repository
 {
-    public class VillaRepository : IVillaRepository
+    public class VillaRepository : Repository<Villa>, IVillaRepository
     {
         private readonly ApplicationDBContext _db;
 
-        public VillaRepository(ApplicationDBContext db)
+
+        // VillaRepository inherits Repository<T> T = Villa here so it needs to send db to its base class so that
+        // Repository knows what db is being worked with to know what it should pass to base methods
+        public VillaRepository(ApplicationDBContext db) : base(db)
         {
             _db = db;
         }

@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => {
 });
 // Add services to the container.
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 builder.Services.AddControllers(options => {   
     //options.ReturnHttpNotAcceptable = true;
     }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
