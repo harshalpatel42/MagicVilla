@@ -22,7 +22,7 @@ namespace MagicVilla_VillaAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MagicVilla_VillaAPI.Model.Villa", b =>
+            modelBuilder.Entity("MagicVilla_VillaAPI.Models.Villa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,7 +129,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MagicVilla_VillaAPI.Model.VillaNumber", b =>
+            modelBuilder.Entity("MagicVilla_VillaAPI.Models.VillaNumber", b =>
                 {
                     b.Property<int>("VillaNo")
                         .HasColumnType("int");
@@ -153,9 +153,9 @@ namespace MagicVilla_VillaAPI.Migrations
                     b.ToTable("VillaNumbers");
                 });
 
-            modelBuilder.Entity("MagicVilla_VillaAPI.Model.VillaNumber", b =>
+            modelBuilder.Entity("MagicVilla_VillaAPI.Models.VillaNumber", b =>
                 {
-                    b.HasOne("MagicVilla_VillaAPI.Model.Villa", "Villa")
+                    b.HasOne("MagicVilla_VillaAPI.Models.Villa", "Villa")
                         .WithMany()
                         .HasForeignKey("VillaId")
                         .OnDelete(DeleteBehavior.Cascade)

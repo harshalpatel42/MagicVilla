@@ -1,5 +1,5 @@
 ﻿using MagicVilla_VillaAPI.Controllers;
-using MagicVilla_VillaAPI.Model;
+using MagicVilla_VillaAPI.Models;
 using System.Linq.Expressions;
 
 namespace MagicVilla_VillaAPI.Repository.IRepository
