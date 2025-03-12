@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MagicVilla_Web.Services
 {
-    public class BaseServices : IBaseServices
+    public class BaseService : IBaseService
     {
         public APIResponse responseModel { get ; set; }
         public IHttpClientFactory httpClient { get; set; }
-        public BaseServices (IHttpClientFactory httpClient)
+        public BaseService (IHttpClientFactory httpClient)
         {
             this.responseModel = new APIResponse();
             this.httpClient = httpClient;
@@ -59,7 +59,7 @@ namespace MagicVilla_Web.Services
                 var dto = new APIResponse
                 {
                     ErrorMessages = new List<string> { Convert.ToString(ex.Message) },
-                    isSuccess = false
+                    IsSuccess = false
                 };
                 var res = JsonConvert.SerializeObject(dto);
                 var APIResponse = JsonConvert.DeserializeObject<T>(res);

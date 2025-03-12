@@ -6,16 +6,16 @@ using static MagicVilla_Utility.SD;
 
 namespace MagicVilla_Web.Services
 {
-    public class VillaServices : BaseServices, IVillaService
+    public class VillaService : BaseService, IVillaService
     {
         private readonly IHttpClientFactory _clientFactory;
         private string villaUrl;
-        public VillaServices(IHttpClientFactory clientFactory, IConfiguration  configuration) : base(clientFactory)
+        public VillaService(IHttpClientFactory clientFactory, IConfiguration  configuration) : base(clientFactory)
         {
             _clientFactory = clientFactory;
             villaUrl = configuration.GetValue<string>("ServiceUrls:VillaAPI");
         }
-        public Task<T> CreateVillaAsync<T>(VillaCreateDTO dto)
+        public Task<T> CreateAsync<T>(VillaCreateDTO dto)
         {
             return SendAsync<T>(new APIRequest()
             {
@@ -25,7 +25,7 @@ namespace MagicVilla_Web.Services
             });
         }
 
-        public Task<T> DeleteVillaAsync<T>(int Id)
+        public Task<T> DeleteAsync<T>(int Id)
         {
             return SendAsync<T>(new APIRequest()
             {
@@ -52,7 +52,7 @@ namespace MagicVilla_Web.Services
             });
         }
 
-        public Task<T> UpdateVillaAsync<T>(VillaUpdateDTO dto)
+        public Task<T> UpdateAsync<T>(VillaUpdateDTO dto)
         {
             return SendAsync<T>(new APIRequest()
             {
