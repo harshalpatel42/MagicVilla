@@ -56,9 +56,10 @@ namespace MagicVilla_Web.Services
                 try
                 {
                     APIResponse ApiResponse = JsonConvert.DeserializeObject<APIResponse>(apiContent);
-                    if(ApiResponse != null && (ApiResponse.StatusCode == System.Net.HttpStatusCode.BadRequest || ApiResponse.StatusCode == System.Net.HttpStatusCode.NotFound))
+                    if (ApiResponse != null && (apiResponse.StatusCode == System.Net.HttpStatusCode.BadRequest
+                        || apiResponse.StatusCode == System.Net.HttpStatusCode.NotFound))
                     {
-                        ApiResponse.StatusCode = HttpStatusCode.BadRequest;
+                        ApiResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;
                         ApiResponse.IsSuccess = false;
                         var res = JsonConvert.SerializeObject(ApiResponse);
                         var returnObj = JsonConvert.DeserializeObject<T>(res);
@@ -70,10 +71,12 @@ namespace MagicVilla_Web.Services
                     var exceptionResponse = JsonConvert.DeserializeObject<T>(apiContent);
                     return exceptionResponse;
                 }
-
                 var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
                 return APIResponse;
             }  
+
+
+
             catch(Exception ex)
             {
                 var dto = new APIResponse

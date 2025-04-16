@@ -108,7 +108,7 @@ namespace MagicVilla_VillaAPI.Controllers
                     ModelState.AddModelError("ErrorMessages", "Villa Number Already Exists");
                     return BadRequest(ModelState);
                 }
-                if (await _dbVilla.GetAsync(u => u.Id == createDTO.VillaId)==null)
+                if (await _dbVilla.GetAsync(u => u.Id == createDTO.VillaId) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "VillaID is Invalid");
                     return BadRequest(ModelState);
