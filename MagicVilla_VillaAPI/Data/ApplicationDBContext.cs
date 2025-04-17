@@ -7,6 +7,7 @@ namespace MagicVilla_VillaAPI.Data
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }
+        public DbSet<LocalUser> LocalUsers { get; set; }
 
 
         #region Seeding the Villas Table
