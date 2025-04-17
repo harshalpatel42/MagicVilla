@@ -2,6 +2,7 @@
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Models.Dto;
 using MagicVilla_VillaAPI.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
 
 namespace MagicVilla_VillaAPI.Repository
 {
@@ -14,17 +15,32 @@ namespace MagicVilla_VillaAPI.Repository
         }
         public bool isUniqueUser(string UserName)
         {
-            throw new NotImplementedException();
+            var user = _db.LocalUsers.FirstOrDefault(x => x.Name == UserName);
+            if (user == null)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
+        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
         {
             throw new NotImplementedException();
         }
 
-        public Task<LocalUser> Register(RegistrationRequestDTO registrationRequestDTO)
+        public async Task<LocalUser> Register(RegistrationRequestDTO registrationRequestDTO)
         {
-            throw new NotImplementedException();
+            LocalUser user = new()
+            {
+                Name = registrationRequestDTO.Name,
+                UserName = registrationRequestDTO.UserName,
+                Password = registrationRequestDTO.Password,
+                Role = registrationRequestDTO.Role
+            };
+            _db.LocalUsers.Add(user);
+            await _db.SaveChangesAsync();
+            user.Password = "";
+            return user;
         }
     }
 }
