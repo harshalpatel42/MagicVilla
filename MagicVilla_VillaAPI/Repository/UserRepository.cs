@@ -35,7 +35,11 @@ namespace MagicVilla_VillaAPI.Repository
             var user = _db.LocalUsers.FirstOrDefault(x => x.UserName == loginRequestDTO.Username && x.Password == loginRequestDTO.Password);
             if(user == null)
             {
-                return null;
+                return new LoginResponseDTO()
+                {
+                    Token = "",
+                    User = null
+                };
             }
 
             // if a user was found in database then we gotta approve the login

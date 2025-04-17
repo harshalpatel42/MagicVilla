@@ -3,6 +3,7 @@ using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Models.Dto;
 using MagicVilla_VillaAPI.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace MagicVilla_VillaAPI.Controllers
         }
 
         #region HttpGet All Villas
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(VillaDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -51,6 +53,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
 
         #region HttpGet Single Villa
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}", Name = "GetVilla")] // Retrieving the Villa with particular ID
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(VillaDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -130,6 +133,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
 
         #region HttpeDelete RemoveVilla
+        [Authorize(Roles = "Custom")]
         [HttpDelete("{id:int}", Name = "Delete Villa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
